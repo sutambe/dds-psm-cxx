@@ -17,8 +17,8 @@
  */
 
 #include <dds/domain/DomainParticipant.hpp>
+#include <idds/domain/DomainParticipantImpl.hpp>
 
-dds::domain::qos::DomainParticipantQos idds::domain::DomainParticipantImpl::DomainParticipantImpl::default_domain_qos_;
 
 idds::domain::DomainParticipantImpl::DomainParticipantImpl(dds::domain::DomainId id)
 {

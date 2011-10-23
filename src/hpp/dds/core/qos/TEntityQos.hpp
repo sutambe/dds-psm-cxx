@@ -32,6 +32,9 @@ class TEntityQos : public dds::core::Value<DELEGATE> {
 public:
     TEntityQos() : dds::core::Value<DELEGATE>() { }
     
+    TEntityQos(const TEntityQos& other)
+        : dds::core::Value<DELEGATE>(other.delegate()) { }
+
     template <typename T>
     TEntityQos(const TEntityQos<T>& qos) :
         dds::core::Value<DELEGATE>(qos.delegate()) { }

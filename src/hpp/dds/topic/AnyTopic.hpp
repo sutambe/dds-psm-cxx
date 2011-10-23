@@ -20,7 +20,6 @@
  */
 
 #include <dds/core/Exception.hpp>
-#include <dds/topic/topicfwd.hpp>
 #include <dds/topic/detail/AnyTopic.hpp>
 #include <dds/topic/AnyTopicDescription.hpp>
 

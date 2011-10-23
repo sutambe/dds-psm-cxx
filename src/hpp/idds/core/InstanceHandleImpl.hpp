@@ -26,7 +26,8 @@ namespace idds { namespace core {
 class InstanceHandleImpl {
 public:
     InstanceHandleImpl();
-    InstanceHandleImpl(const dds::core::null_type& src);
+    InstanceHandleImpl(const dds::core::null_type& src);    
+    InstanceHandleImpl(const InstanceHandleImpl& other);    
     ~InstanceHandleImpl();
 
 public:

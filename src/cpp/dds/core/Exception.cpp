@@ -70,6 +70,11 @@ dds::core::UnsupportedError::UnsupportedError(const std::string& msg) :
     // implementation-defined
 }
 
+dds::core::UnsupportedError::UnsupportedError(const UnsupportedError& other) 
+    : Exception(), 
+    std::logic_error(other.what())
+{} 
+
 
 dds::core::UnsupportedError::~UnsupportedError() throw () {
     // implementation-defined

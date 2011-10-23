@@ -23,14 +23,24 @@
 
 namespace dds { namespace core { namespace policy {
 
-template <typename DELEGATE>
-class TQosPolicyCount : public dds::core::Value<DELEGATE> {
+template <typename D>
+class TQosPolicyCount : public dds::core::Value<D> {
 public:
-    TQosPolicyCount();
+    TQosPolicyCount(QosPolicyId policy_id, int32_t count)
+        : dds::core::Value<D>(policy_id, count)
+    { }
 
+    TQosPolicyCount(const TQosPolicyCount& other) 
+        : dds::core::Value<D>(other.policy_id(), other.count())
+    { }
 public:
-    dds::core::policy::QosPolicyId policy_id() const;
-    int32_t count() const;
+    QosPolicyId policy_id() const {
+        return this->delegate().policy_id();
+    }
+
+    int32_t count() const {
+        return this->delegate().count();
+    }
 };
 
 } } }

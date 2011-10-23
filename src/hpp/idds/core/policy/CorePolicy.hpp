@@ -55,7 +55,7 @@ public:
      *
      * @param seq the sequence of octet representing the user data
      */
-    explicit UserData(dds::core::ByteSeq& seq) : value_(seq) { }
+    explicit UserData(const dds::core::ByteSeq& seq) : value_(seq) { }
 
     /**
      * Set the value for the user data.
@@ -110,7 +110,7 @@ public:
      *
      * @param seq the group data value
      */
-    explicit GroupData(dds::core::ByteSeq& seq) : value_(seq) { }
+    explicit GroupData(const dds::core::ByteSeq& seq) : value_(seq) { }
 
     /**
      * Set the value for this <code>GroupData</code>
@@ -155,7 +155,7 @@ class TopicData {
 public:
     TopicData() : value_() { }
 
-    explicit TopicData(dds::core::ByteSeq& seq) : value_(seq) { }
+    explicit TopicData(const dds::core::ByteSeq& seq) : value_(seq) { }
 
     void value(const dds::core::ByteSeq& seq) {
         value_ = seq;
@@ -464,29 +464,36 @@ private:
 class ReaderDataLifecycle {
 public:
     ReaderDataLifecycle()
-    : nowriter_delay_(dds::core::Duration::infinite()),
-      disposed_samples_delay_(dds::core::Duration::infinite()) { }
+        : autopurge_nowriter_samples_delay_(dds::core::Duration::infinite()),
+        autopurge_disposed_samples_delay_(dds::core::Duration::infinite()) { }
 
     ReaderDataLifecycle(const dds::core::Duration& the_nowriter_delay,
                         const dds::core::Duration& the_disposed_samples_delay)
-    : nowriter_delay_(the_nowriter_delay),
-      disposed_samples_delay_(the_disposed_samples_delay) { }
+                        : autopurge_nowriter_samples_delay_(the_nowriter_delay),
+                        autopurge_disposed_samples_delay_(the_disposed_samples_delay) { }
 
-    const dds::core::Duration& nowriter_delay() { return nowriter_delay_; }
+public:
 
-    void nowriter_delay(dds::core::Duration& d) { nowriter_delay_ = d; }
+   const dds::core::Duration autopurge_nowriter_samples_delay() const {
+		return autopurge_nowriter_samples_delay_;
+	}
 
-    const dds::core::Duration& disposed_samples_delay() {
-        return disposed_samples_delay_;
-    }
+	void autopurge_nowriter_samples_delay(const dds::core::Duration& d) {
+        autopurge_nowriter_samples_delay_ = d;
+	}
 
-    void disposed_samples_delay(const dds::core::Duration& d) {
-        disposed_samples_delay_ = d;
-    }
+	const dds::core::Duration autopurge_disposed_samples_delay() const {
+        return autopurge_disposed_samples_delay_; 		
+	}
+
+	void autopurge_disposed_samples_delay(const dds::core::Duration& d) {
+		autopurge_disposed_samples_delay_ = d;
+	}
+
 
 private:
-    dds::core::Duration nowriter_delay_;
-    dds::core::Duration disposed_samples_delay_;
+    dds::core::Duration autopurge_nowriter_samples_delay_;
+    dds::core::Duration autopurge_disposed_samples_delay_;
 };
 
 //==============================================================================
@@ -794,6 +801,49 @@ public:
       max_instances_(the_max_instances),
       max_samples_per_instance_(the_max_samples_per_instance)
     { }
+
+public:
+	void service_cleanup_delay(const dds::core::Duration& d)  {
+		cleanup_delay_ = d;
+	}
+	const dds::core::Duration service_cleanup_delay() const {
+		return cleanup_delay_;
+	}
+
+	void history_kind(dds::core::policy::HistoryKind::Type the_kind) {
+		history_kind_ = the_kind;
+	}
+	dds::core::policy::HistoryKind::Type history_kind() const {
+		return history_kind_;
+	}
+
+	void history_depth(int32_t the_depth) {
+		history_depth_ = the_depth;
+	}
+	int32_t history_depth() const {
+		return history_depth_;
+	}
+
+	void max_samples(int32_t the_max_samples) {
+		max_samples_ = the_max_samples;
+	}
+	int32_t max_samples() const {
+		return max_samples_;
+	}
+
+	void max_instances(int32_t the_max_instances) {
+		max_instances_ = the_max_instances;
+	}
+	int32_t max_instances() const {
+		return max_instances_;
+	}
+
+	void max_samples_per_instance(int32_t the_max_samples_per_instance) {
+		max_samples_per_instance_ = the_max_samples_per_instance;
+	}
+	int32_t max_samples_per_instance() const {
+		return max_samples_per_instance_;
+	}
 
 private:
     dds::core::Duration cleanup_delay_;

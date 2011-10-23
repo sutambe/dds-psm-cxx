@@ -21,7 +21,7 @@
 
 #include <stdexcept>
 #include <string>
-
+#include <dds/core/macros.hpp>
 
 namespace dds { namespace core {
 

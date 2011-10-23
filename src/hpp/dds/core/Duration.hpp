@@ -26,7 +26,7 @@ namespace dds { namespace core {
 /**
  * This class represents a time interval.
  */
-class Duration {
+class OMG_DDS_API Duration {
 public:
     static const Duration zero();       // {0, 0}
     static const Duration infinite();   // {0x7fffffff, 0x7fffffff}

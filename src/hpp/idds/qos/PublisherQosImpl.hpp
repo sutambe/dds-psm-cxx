@@ -28,6 +28,8 @@ class PublisherQosImpl {
 public:
     PublisherQosImpl();
 
+    PublisherQosImpl(const PublisherQosImpl& other);
+
     PublisherQosImpl(const dds::core::policy::Presentation& presentation,
                      const dds::core::policy::Partition& partition,
                      const dds::core::policy::GroupData& gdata,

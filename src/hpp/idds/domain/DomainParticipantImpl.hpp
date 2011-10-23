@@ -99,7 +99,7 @@ private:
     dds::topic::qos::TopicQos default_topic_qos_;
     dds::pub::qos::PublisherQos default_pub_qos_;
     dds::sub::qos::SubscriberQos default_sub_qos_;
-    static dds::domain::qos::DomainParticipantQos default_domain_qos_;
+    dds::domain::qos::DomainParticipantQos default_domain_qos_;
     
 };
 

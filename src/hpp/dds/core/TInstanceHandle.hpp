@@ -30,8 +30,12 @@ class TInstanceHandle : public dds::core::Value<DELEGATE> {
 public:
     TInstanceHandle() { }
 
-    TInstanceHandle(const dds::core::null_type& src)
-    : dds::core::Value<DELEGATE>(src) { }
+    TInstanceHandle(const dds::core::null_type& nullHandle)
+    : dds::core::Value<DELEGATE>(nullHandle) { }
+
+    TInstanceHandle(const TInstanceHandle& other)
+        : dds::core::Value<DELEGATE>(other.delegate())
+    { }
 
     ~TInstanceHandle() { }
 

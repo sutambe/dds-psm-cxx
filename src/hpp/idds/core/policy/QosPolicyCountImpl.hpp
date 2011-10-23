@@ -25,7 +25,16 @@ namespace idds { namespace core { namespace policy {
 
 class QosPolicyCountImpl {
 public:
-    QosPolicyCountImpl() { }
+    // @TODO: Finish Implementation
+    QosPolicyCountImpl(dds::core::policy::QosPolicyId id, uint32_t count)
+        : policy_id_(id),
+          count_(count)
+    { }
+
+    QosPolicyCountImpl(const QosPolicyCountImpl& other)
+        : policy_id_(other.policy_id()),
+        count_(other.count())
+    { }
 
 public:
     dds::core::policy::QosPolicyId policy_id() const {

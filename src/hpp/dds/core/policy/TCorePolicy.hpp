@@ -56,7 +56,12 @@ public:
 	 */
 	explicit TUserData(const dds::core::ByteSeq& seq) : dds::core::Value<D>(seq) { }
 
+    //@TODO Implement
 	TUserData(const uint8_t* value_begin, const uint8_t* value_end);
+    
+    TUserData(const TUserData& other) 
+        : dds::core::Value<D>(other.value()) 
+    { }
 
 public:
 	/**
@@ -119,6 +124,10 @@ public:
 	 */
 	explicit TGroupData(const dds::core::ByteSeq& seq) : dds::core::Value<D>(seq) { }
 
+	TGroupData(const TGroupData& other) 
+		: dds::core::Value<D>(other.value()) 
+	{ }
+
 	TGroupData(const uint8_t* value_begin, const uint8_t* value_end);
 
 public:
@@ -172,6 +181,8 @@ public:
 
 	explicit TTopicData(const dds::core::ByteSeq& seq) : dds::core::Value<D>(seq) { }
 
+	TTopicData(const TTopicData& other) : dds::core::Value<D>(other.value()) { }
+
 	TTopicData(const uint8_t* value_begin, const uint8_t* value_end);
 
 public:
@@ -208,6 +219,7 @@ public:
 	const uint8_t* end() const;
 };
 
+
 //==============================================================================
 
 /**
@@ -232,6 +244,10 @@ public:
 
 	explicit TEntityFactory(bool the_auto_enable)
 	: dds::core::Value<D>(the_auto_enable) { }
+
+	TEntityFactory(const TEntityFactory& other)
+		: dds::core::Value<D>(other.autoenable_created_entities()) 
+	{ }
 
 public:
 	void autoenable_created_entities(bool on) {
@@ -272,7 +288,13 @@ template <typename D>
 class TTransportPriority : public dds::core::Value<D> {
 public:
 	explicit TTransportPriority(int32_t prio) : dds::core::Value<D>(prio) { }
-	TTransportPriority() : dds::core::Value<D>(0) { }
+	
+    TTransportPriority() : dds::core::Value<D>(0) { }
+
+    TTransportPriority(const TTransportPriority& other) 
+        : dds::core::Value<D>(other.value()) 
+    { }
+
 public:
 	void value(int32_t prio) {
 		this->delegate().value(prio);
@@ -306,13 +328,18 @@ template <typename D>
 class TLifespan : public dds::core::Value<D> {
 public:
 	explicit TLifespan(const dds::core::Duration& d) : dds::core::Value<D>(d) { }
-	TLifespan() : dds::core::Value<D>(dds::core::Duration::infinite()) { }
 
+    TLifespan() : dds::core::Value<D>(dds::core::Duration::infinite()) { }
+   
+    TLifespan(const TLifespan& other) 
+        : dds::core::Value<D>(other.duration())
+    { }
 public:
 	void duration(const dds::core::Duration& d) {
 		this->delegate().duration(d);
 	}
-	const dds::core::Duration duration() const {
+	
+    const dds::core::Duration duration() const {
 		return this->delegate().duration();
 	}
 };
@@ -344,7 +371,9 @@ class TDeadline : public dds::core::Value<D> {
 public:
 	explicit TDeadline(const dds::core::Duration& d) : dds::core::Value<D>(d) { }
 
-	TDeadline() : dds::core::Value<D>(dds::core::Duration::infinite()) { }
+	TDeadline(const TDeadline& other) : dds::core::Value<D>(other.period()) { }
+	
+    TDeadline() : dds::core::Value<D>(dds::core::Duration::infinite()) { }
 
 public:
 	void period(const dds::core::Duration& d) {
@@ -358,11 +387,15 @@ public:
 //==============================================================================
 
 template <typename D>
-class TLatencyBudget : public dds::core::Value<D>{
+class TLatencyBudget : public dds::core::Value<D> {
 public:
 	explicit TLatencyBudget(const dds::core::Duration& d) : dds::core::Value<D>(d) { }
+
 	TLatencyBudget() : dds::core::Value<D>(dds::core::Duration::zero()) { }
 
+	TLatencyBudget(const TLatencyBudget& other) 
+		: dds::core::Value<D>(other.duration())
+	{ } 
 public:
 	void duration(const dds::core::Duration& d) {
 		this->delegate().duration(d);
@@ -377,8 +410,13 @@ template <typename D>
 class TTimeBasedFilter : public dds::core::Value<D> {
 public:
 	TTimeBasedFilter() : dds::core::Value<D>(dds::core::Duration::zero()) { }
-	explicit TTimeBasedFilter(const dds::core::Duration& the_min_separation)
+	
+    explicit TTimeBasedFilter(const dds::core::Duration& the_min_separation)
 	: dds::core::Value<D>(the_min_separation) { }
+
+    TTimeBasedFilter(const TTimeBasedFilter& other)
+        : dds::core::Value<D>(other.minimum_separation())
+    { }
 
 public:
 	void minimum_separation(const dds::core::Duration& ms) {
@@ -388,6 +426,7 @@ public:
 		return this->delegate().min_separation();
 	}
 };
+
 
 //==============================================================================
 template <typename D>
@@ -403,6 +442,10 @@ public:
 		this->delegate().name().push_back("");
 	}
 
+    TPartition(const TPartition& other) 
+        : dds::core::Value<D>(other.name())
+    { }
+
 public:
 	void name(const dds::core::StringSeq& partitions) {
 		this->delegate().name() = partitions;
@@ -416,13 +459,18 @@ public:
 };
 
 //==============================================================================
+#ifdef OMG_DDS_OWNERSHIP_SUPPORT
 
 template <typename D>
 class TOwnership : public dds::core::Value<D> {
 public:
 	explicit TOwnership(dds::core::policy::OwnershipKind::Type the_kind)
 	: dds::core::Value<D>(the_kind) { }
+
+	TOwnership(const TOwnership& other) : dds::core::Value<D>(other.kind()) { }
+
 	TOwnership() : dds::core::Value<D>(dds::core::policy::OwnershipKind::SHARED) { }
+
 
 public:
     void kind(dds::core::policy::OwnershipKind::Type the_kind) {
@@ -440,14 +488,19 @@ public:
 		return TOwnership(dds::core::policy::OwnershipKind::SHARED);
 	}
 };
+
+
 //==============================================================================
 
-#ifdef OMG_DDS_OWNERSHIP_SUPPORT
 
 template <typename D>
 class TOwnershipStrength : public dds::core::Value<D> {
 public:
 	explicit TOwnershipStrength(int32_t s) : dds::core::Value<D>(s) { }
+    
+    TOwnershipStrength(const TOwnershipStrength& other) 
+        : dds::core::Value<D>(other.value())
+        { }
 
 public:
 	int32_t value() const { return this->delegate().strength(); }
@@ -467,6 +520,10 @@ public:
 
 	explicit TWriterDataLifecycle(bool the_autodispose)
 	: dds::core::Value<D>(the_autodispose) { }
+
+    TWriterDataLifecycle(const TWriterDataLifecycle& other)
+        : dds::core::Value<D>(other.autodispose_unregistered_instances())
+    { }
 
 public:
     bool autodispose_unregistered_instances() const {
@@ -496,21 +553,24 @@ public:
 			const dds::core::Duration& the_disposed_samples_delay)
 	: dds::core::Value<D>(the_nowriter_delay, the_disposed_samples_delay) { }
 
+    TReaderDataLifecycle(const TReaderDataLifecycle& other) 
+        : dds::core::Value<D>(other.autopurge_nowriter_samples_delay(), other.autopurge_disposed_samples_delay())
+    { }
 public:
 	const dds::core::Duration autopurge_nowriter_samples_delay() const {
-		return this->delegate().nowriter_delay();
+		return this->delegate().autopurge_nowriter_samples_delay();
 	}
 
 	void autopurge_nowriter_samples_delay(const dds::core::Duration& d) {
-		this->delegate().nowriter_delay(d);
+		this->delegate().autopurge_nowriter_samples_delay(d);
 	}
 
 	const dds::core::Duration autopurge_disposed_samples_delay() const {
-		return this->delegate().disposed_samples_delay();
+		return this->delegate().autopurge_disposed_samples_delay();
 	}
 
 	void autopurge_disposed_samples_delay(const dds::core::Duration& d) {
-		this->delegate().disposed_samples_delay(d);
+		this->delegate().autopurge_disposed_samples_delay(d);
 	}
 public:
 	static TReaderDataLifecycle NoAutoPurgeDisposedSamples() {
@@ -525,8 +585,11 @@ public:
 template <typename D>
 class TDurability : public dds::core::Value<D> {
 public:
-	TDurability(dds::core::policy::DurabilityKind::Type the_kind)
+	explicit TDurability(dds::core::policy::DurabilityKind::Type the_kind)
 	: dds::core::Value<D>(the_kind) { }
+
+	TDurability(const TDurability& other) : dds::core::Value<D>(other.kind()) { }
+
 	TDurability() : dds::core::Value<D>(dds::core::policy::DurabilityKind::VOLATILE) { }
 
 public:
@@ -567,6 +630,13 @@ public:
 			the_coherent_access,
 			the_ordered_access)
 			{ }
+
+    TPresentation(const TPresentation& other) : 
+        dds::core::Value<D>(other.access_scope(),
+            other.coherent_access(),
+            other.ordered_access()) 
+    { }
+
 
 public:
 	void access_scope(dds::core::policy::PresentationAccessScopeKind::Type  as) {
@@ -622,6 +692,10 @@ public:
 			the_max_blocking_time)
 			{ }
 
+    TReliability(const TReliability& other) 
+        : dds::core::Value<D>(other.kind(), other.max_blocking_time())
+    { }
+
 public:
 
 	void kind(dds::core::policy::ReliabilityKind::Type the_kind) {
@@ -655,6 +729,11 @@ class TDestinationOrder : public dds::core::Value<D> {
 public:
 	explicit TDestinationOrder(dds::core::policy::DestinationOrderKind::Type the_kind)
 	: dds::core::Value<D>(the_kind) { }
+
+	TDestinationOrder(const TDestinationOrder& other) 
+		: dds::core::Value<D>(other.kind())
+	{ }
+
 	TDestinationOrder() :
 		dds::core::Value<D>(dds::core::policy::DestinationOrderKind::BY_SOURCE_TIMESTAMP) { }
 
@@ -684,6 +763,10 @@ public:
 
 	THistory(dds::core::policy::HistoryKind::Type the_kind, int32_t the_depth)
 	: dds::core::Value<D>(the_kind, the_depth) { }
+
+	THistory(const THistory& other) 
+		: dds::core::Value<D>(other.kind(), other.depth())
+	{ } 
 
 public:
 	dds::core::policy::HistoryKind::Type  kind() const {
@@ -726,6 +809,10 @@ public:
 			the_max_samples_per_instance)
 			{ }
 
+    TResourceLimits(const TResourceLimits& other)
+        : dds::core::Value<D>(other.max_samples(), other.max_instances(), other.max_samples_per_instance()) 
+    { }
+
 public:
 	void max_samples(int32_t samples) {
 		this->delegate().max_samples(samples);
@@ -750,6 +837,7 @@ public:
 };
 
 
+
 //==============================================================================
 
 template <typename D>
@@ -762,6 +850,10 @@ public:
 	TLiveliness(dds::core::policy::LivelinessKind::Type the_kind,
 			const dds::core::Duration& the_lease_duration)
 	:  dds::core::Value<D>(the_kind, the_lease_duration) { }
+
+    TLiveliness(const TLiveliness& other)
+        : dds::core::Value<D>(other.kind(), other.lease_duration())
+    { }
 
 public:
 	void kind(dds::core::policy::LivelinessKind::Type the_kind) {
@@ -789,7 +881,7 @@ public:
 	}
 };
 
-
+ 
 //==============================================================================
 
 #ifdef OMG_DDS_PERSISTENCE_SUPPORT
@@ -813,6 +905,13 @@ public:
 			the_max_samples,
 			the_max_instances,
 			the_max_samples_per_instance) { }
+
+	TDurabilityService(const TDurabilityService& other) 
+		: dds::core::Value<D>(other.service_cleanup_delay(),
+			other.history_kind(), other.history_depth(),
+			other.max_samples(), other.max_instances(), other.max_samples_per_instance()) 
+	{ }
+			
 
 public:
 	void service_cleanup_delay(const dds::core::Duration& d)  {
@@ -875,6 +974,9 @@ public:
     explicit TDataRepresentation(
         const dds::core::policy::DataRepresentationIdSeq& value);
 
+    TDataRepresentation(const TDataRepresentation& other)
+        : dds::core::Value<D>(other.value())
+    { }
 public:
     void value(const dds::core::policy::DataRepresentationIdSeq& value);
 
@@ -907,7 +1009,7 @@ public:
 //==============================================================================
 
 
-} } }
+} } } 
 
 #endif /* OMG_TDDS_CORE_POLICY_CORE_POLICY_HPP_ */
 

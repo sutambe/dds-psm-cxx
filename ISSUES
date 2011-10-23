@@ -96,3 +96,21 @@ more modular aprroache based on the ReadStatus. In addition, the current
 API makes  very confusing the read_next_instance semantics -- it is 
 not clear at all how that should be used with the ReadQuery.
 
+==============================================================================
+  ISSUE 12: Policy Classes Lack of Copy Ctor
+==============================================================================
+The Policy class are lacking a copy ctor. This should be added for both
+precise its semantics as well as avoid issues with Visual C++ compiler.
+
+
+==============================================================================
+	ISSUE 13
+==============================================================================
+ReaderDataLifeCicle forwards to Delegate methods which don't have the 
+same name as the wrapper class.
+
+==============================================================================
+	ISSUE 14
+==============================================================================
+address dominance issue on Listeners!
+

@@ -25,7 +25,6 @@
  * provide equivalent definitions.
  */
 
-#include <inttypes.h>
-
+#include <stdint.h>
 
 #endif /* OMG_DDS_CORE_DETAIL_INT_TYPES_HPP_ */

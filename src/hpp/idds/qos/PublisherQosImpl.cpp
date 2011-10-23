@@ -31,6 +31,12 @@ PublisherQosImpl::PublisherQosImpl(const dds::core::policy::Presentation& presen
   gdata_(gdata),
   factory_policy_(factory_policy) { }
 
+PublisherQosImpl::PublisherQosImpl(const PublisherQosImpl& other)
+: presentation_(other.presentation_),
+  partition_(other.partition_),
+  gdata_(other.gdata_),
+  factory_policy_(other.factory_policy_) { }
+
 template<>
 const dds::core::policy::Presentation&
 PublisherQosImpl::policy<dds::core::policy::Presentation>() const {

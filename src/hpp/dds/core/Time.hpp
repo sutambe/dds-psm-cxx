@@ -25,7 +25,7 @@ namespace dds { namespace core {
 
 class Duration;
     
-class Time {
+class OMG_DDS_API Time {
 public:
     static const Time invalid();       // {-1, 0xffffffff}
 

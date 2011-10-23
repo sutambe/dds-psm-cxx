@@ -29,6 +29,9 @@ InstanceHandleImpl::InstanceHandleImpl(const dds::core::null_type& src)
 
 InstanceHandleImpl::~InstanceHandleImpl() { }
 
+InstanceHandleImpl::InstanceHandleImpl(const InstanceHandleImpl& other) 
+    : handle_(other.handle_)
+{ }
 InstanceHandleImpl&
 InstanceHandleImpl::operator=(const dds::core::null_type& src) {
 	handle_ = -1;

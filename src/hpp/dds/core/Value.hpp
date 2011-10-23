@@ -35,6 +35,9 @@ public:
     template <typename ARG>
     Value(const ARG& arg) : d_(arg) { }
 
+	// -- We can't assume that the compiler supports variadic templates,
+	// -- `yet. this code should be refactored to take advantage of compier that
+	// -- do support variadic templates.
     template <typename ARG1, typename ARG2>
     Value(const ARG1& arg1, const ARG2& arg2) : d_(arg1, arg2) { }
     
@@ -42,6 +45,18 @@ public:
     Value(const ARG1& arg1, const ARG2& arg2, const ARG3& arg3)
     : d_(arg1, arg2, arg3) { }
     
+	template <typename ARG1, typename ARG2, typename ARG3, typename ARG4>
+    Value(const ARG1& arg1, const ARG2& arg2, const ARG3& arg3, const ARG4& arg4)
+    : d_(arg1, arg2, arg3, arg4) { }
+
+	template <typename ARG1, typename ARG2, typename ARG3, typename ARG4, typename ARG5>
+    Value(const ARG1& arg1, const ARG2& arg2, const ARG3& arg3, const ARG4& arg4, const ARG5& arg5)
+    : d_(arg1, arg2, arg3, arg4, arg5) { }
+
+	template <typename ARG1, typename ARG2, typename ARG3, typename ARG4, typename ARG5, typename ARG6>
+    Value(const ARG1& arg1, const ARG2& arg2, const ARG3& arg3, const ARG4& arg4, const ARG5& arg5, const ARG6& arg6)
+    : d_(arg1, arg2, arg3, arg4, arg5, arg6) { }
+
 public:
     ~Value() { }
 

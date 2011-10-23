@@ -38,7 +38,9 @@
 
 
 // DLL Export Macros
-#define OMG_DDS_API_DETAIL
+
+#define OMG_DDS_API_DETAIL __declspec(dllexport)
+
 // ==========================================================================
 
 
