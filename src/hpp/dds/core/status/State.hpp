@@ -55,7 +55,7 @@ private:
     // -- This Ctor should be fixed as currently there is this 
     // -- cast only to avoid an error when compiling with the  MS vC++ compiler
     SampleRejectedState(uint32_t s) 
-        : MaskType((unsigned long long)s) 
+        : MaskType((uint64_t)s)
     { } 
 
 };

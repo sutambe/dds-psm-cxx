@@ -39,7 +39,11 @@
 
 // DLL Export Macros
 
-#define OMG_DDS_API_DETAIL __declspec(dllexport)
+#ifdef _WIN32 // This is defined for 32/64 bit Windows
+#  define OMG_DDS_API_DETAIL __declspec(dllexport)
+#else
+#  define OMG_DDS_API_DETAIL
+#endif
 
 // ==========================================================================
 
