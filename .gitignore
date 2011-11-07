@@ -1,6 +1,4 @@
 dds-psm-cxx.*
-./ipch
-./ipch/*
-./Debug
-./Debug/*
+ipch
+Debug
 *~
