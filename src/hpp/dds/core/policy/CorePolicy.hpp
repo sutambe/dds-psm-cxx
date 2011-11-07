@@ -35,6 +35,7 @@ static const dds::core::policy::QosPolicyId value = ID; \
 }; \
 template <> \
 class policy_name<POLICY> { \
+public:\
 static const std::string& name(); \
 };
 

@@ -84,7 +84,7 @@ public:
     }
 
     template <typename POLICY>
-    TEntityQos& operator >> (POLICY& p) const {
+    const TEntityQos& operator >> (POLICY& p) const {
         p = this->delegate().template policy<POLICY>();
         return *this;
     }

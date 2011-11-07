@@ -68,16 +68,16 @@ public:
         return *this;
     }
 
-    bool operator==(const Value& other) {
+    bool operator==(const Value& other) const {
     	return (d_ == other.d_);
     }
 
-    bool operator !=(const Value& other) {
+    bool operator !=(const Value& other) const {
     	return !(d_ == other.d_);
     }
 
 public:
-    const D* operator->() const { return d_; }
+    const D* operator->() const { return &d_; }
     D* operator->() { return &d_; }
 
     const D& delegate() const { return d_; }

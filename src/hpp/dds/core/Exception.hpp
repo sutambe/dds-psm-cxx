@@ -196,7 +196,7 @@ class InvalidDataError : public Exception, public std::logic_error
 {
 public:
     explicit InvalidDataError(const std::string& msg);
-    InvalidDataError(const UnsupportedError& src);
+    InvalidDataError(const InvalidDataError& src);
     virtual ~InvalidDataError() throw ();
 
 public:
