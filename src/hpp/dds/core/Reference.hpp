@@ -267,5 +267,11 @@ protected:
 
 } } /* namespace dds / namespace core */
 
+template <class D> bool operator == (dds::core::null_type, const dds::core::Reference<D> & r)
+{return r.is_nil();}
+
+template <class D> bool operator != (dds::core::null_type, const dds::core::Reference<D> & r)
+{ return !r.is_nil(); }
+
 #endif /* OMG_DDS_CORE_REFERENCE_HPP_ */
 
