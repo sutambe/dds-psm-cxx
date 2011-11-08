@@ -1,15 +1,16 @@
-#ifndef OMG_DDS_SUB_T_LOANED_SAMPLES_HPP_
-#define OMG_DDS_SUB_T_LOANED_SAMPLES_HPP_
+#ifndef OMG_DDS_SUB_LOANED_SAMPLES_HPP_
+#define OMG_DDS_SUB_LOANED_SAMPLES_HPP_
 
-#include <dds/sub/detail/LoanedSample.hpp>
+#include <dds/sub/detail/LoanedSamples.hpp>
+#include <dds/sub/Sample.hpp>
 
 namespace dds { namespace sub {
     template <typename T, 
-              template <typename Q>  DELEGATE = detail::LoanedSamples>
-    class LoanedSamples;    
+              template <typename Q> DELEGATE = detail::LoanedSamples>
+    class LoanedSamples;
 } }
 
-template <typename T, template <typename Q>  DELEGATE>
+template <typename T, template <typename Q> DELEGATE>
 class dds::sub::LoanedSamples : public dds::core::Value< DELEGATE<T> >
 {
 public:
@@ -17,14 +18,13 @@ public:
     typedef Sample<DataType> SampleType;
     
 public:
-    LoanedSamples() { }
+    LoanedSamples() { /* implementation-defined */ }
     LoanedSamples(const LoanedSamples& src);
     
     /**
-     * Implicitly return the loan. The specifics of how the loan is returned
-     * are encapsulated in the implementation layer.
+     * Implicitly return the loan.
      */
-    ~LoanedSamples() { }
+    ~LoanedSamples() { /* implementation-defined */ }
     
 public:
     class Iterator : public std::iterator<std::forward_iterator_tag, const SampleType>
@@ -81,4 +81,4 @@ public:
     
 };
 
-#endif /* OMG_DDS_SUB_T_LOANED_SAMPLES_HPP_ */
+#endif /* OMG_DDS_SUB_LOANED_SAMPLES_HPP_ */
