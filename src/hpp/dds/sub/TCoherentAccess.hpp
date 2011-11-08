@@ -1,5 +1,5 @@
-#ifndef OMG_TDDS_SUB_COHERENT_ACCESS_HPP_
-#define OMG_TDDS_SUB_COHERENT_ACCESS_HPP_
+#ifndef OMG_DDS_SUB_TCOHERENT_ACCESS_HPP_
+#define OMG_DDS_SUB_TCOHERENT_ACCESS_HPP_
 
 /* Copyright 2010, Object Management Group, Inc.
  * Copyright 2010, PrismTech, Corp.
@@ -19,14 +19,13 @@
  * limitations under the License.
  */
 
-#include <dds/sub/subfwd.hpp>
 #include <dds/core/Value.hpp>
 
 
-namespace tdds { namespace sub {
+namespace dds { namespace sub {
 
 template <typename DELEGATE>
-class CoherentAccess : public dds::core::Value<DELEGATE> {
+class TCoherentAccess : public dds::core::Value<DELEGATE> {
 public:
     /**
      * This operation indicates that the application is about to access
@@ -49,7 +48,7 @@ public:
      * application must call end_access as many times as it called
      * begin_access.
      */
-    explicit CoherentAccess(const dds::sub::Subscriber& sub);
+    explicit TCoherentAccess(const dds::sub::Subscriber& sub);
 
 public:
     /**
@@ -91,19 +90,19 @@ public:
      * the data samples it must call end_access.  It is not required for
      * the application to call begin_access/end_access if the
      * PRESENTATION QosPolicy has the access_scope set to something
-     * other than ‘GROUP.’ Calling begin_access/end_access in this case
+     * other than �GROUP. Calling begin_access/end_access in this case
      * is not considered an error and has no effect.  The calls to
      * begin_access/end_access may be nested. In that case, the
      * application must call end_access as many times as it called
      * begin_access.
      */
-    ~CoherentAccess();  // ends access implicitly
+    ~TCoherentAccess();  // ends access implicitly
 
 private:
-    CoherentAccess(const CoherentAccess&);
-    CoherentAccess& operator=(const CoherentAccess&);
+    TCoherentAccess(const TCoherentAccess&);
+    TCoherentAccess& operator=(const TCoherentAccess&);
 };
 
 } }
 
-#endif /* OMG_TDDS_SUB_COHERENT_ACCESS_HPP_ */
+#endif /* OMG_TDDS_SUB_TCOHERENT_ACCESS_HPP_ */

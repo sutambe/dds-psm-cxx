@@ -20,7 +20,6 @@
  */
 
 #include <dds/core/Exception.hpp>
-#include <dds/sub/subfwd.hpp>
 #include <dds/sub/detail/AnyDataReader.hpp>
 
 namespace dds { namespace sub {

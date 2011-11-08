@@ -19,8 +19,6 @@
  * limitations under the License.
  */
 
-#include <idds/sub/subfwd.hpp>
-
 
 namespace idds { namespace sub {
 

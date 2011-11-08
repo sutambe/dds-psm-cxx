@@ -20,7 +20,6 @@
  */
 
 #include <dds/core/ref_traits.hpp>
-#include <dds/sub/detail/subfwd.hpp>
 #include <idds/core/ConditionImpl.hpp>
 
 
@@ -28,26 +27,28 @@ namespace dds { namespace sub { namespace cond { namespace detail {
 
 
 template <typename T>
-class ReadConditionImpl : public idds::core::ConditionImpl {
-public:
-    typedef typename dds::core::smart_ptr_traits< dds::sub::detail::DataReaderHolder<T> >::ref_type
-    DRHolder;
+class ReadCondition : public idds::core::ConditionImpl {
 
-public:
-    ReadConditionImpl(const DRHolder& reader) : reader_(reader) { }
-
-    virtual ~ReadConditionImpl() { }
-
-public:
-    const dds::sub::detail::DataReaderHolder<T>* parent() const {
-        return reader_.get();
-    }
-
-public:
-    // TODO
-
-private:
-    DRHolder reader_;
+//public:
+//    typedef typename dds::core::smart_ptr_traits< dds::sub::detail::DataReaderHolder<T> >::ref_type
+//    DRHolder;
+//
+//public:
+//    ReadCondition(const DRHolder& reader) : reader_(reader) { }
+//
+//    virtual ~ReadConditionImpl() { }
+//
+//public:
+//    const dds::sub::detail::DataReaderHolder<T>* parent() const {
+//        return reader_.get();
+//    }
+//
+//public:
+//    // TODO
+//
+//private:
+//    DRHolder reader_;
+//
 };
 
 } } } }

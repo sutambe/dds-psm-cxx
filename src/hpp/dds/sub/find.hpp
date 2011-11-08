@@ -22,10 +22,8 @@
 #include <string>
 #include <vector>
 
-#include <dds/core/corefwd.hpp>
+#include <dds/core/macros.hpp>
 #include <dds/core/ref_traits.hpp>
-#include <dds/topic/topicfwd.hpp>
-#include <dds/sub/subfwd.hpp>
 #include <dds/sub/detail/find.hpp>
 
 
@@ -90,7 +88,7 @@ find(const dds::sub::Subscriber& sub,
 		const dds::topic::TopicDescription<T>& topic_description,
 		FwdIterator begin, uint32_t max_size) {
 
-	DDS_STATIC_ASSERT((dds::core::is_same<T, typename READER::DataType>::value));
+	OMG_DDS_STATIC_ASSERT((dds::core::is_same<T, typename READER::DataType>::value));
 	return ::dds::sub::detail::find<READER, T, FwdIterator>(sub,
                                                             topic_description,
                                                             begin,
@@ -103,7 +101,7 @@ find(const dds::sub::Subscriber& sub,
 		const dds::topic::TopicDescription<T>& topic_description,
 		BinIterator begin) {
 
-	DDS_STATIC_ASSERT((dds::core::is_same<T, typename READER::DataType>::value));
+	OMG_DDS_STATIC_ASSERT((dds::core::is_same<T, typename READER::DataType>::value));
 	return ::dds::sub::detail::find<READER, T, BinIterator>(sub,
                                                             topic_description,
                                                             begin);

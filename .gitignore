@@ -4,3 +4,6 @@ ipch
 ipch/*
 */Debug/*
 *~
+.cproject
+.project
+Debug

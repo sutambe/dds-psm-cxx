@@ -21,7 +21,6 @@
 
 #include <dds/sub/qos/DataReaderQos.hpp>
 #include <dds/sub/Subscriber.hpp>
-#include <dds/sub/parent.hpp>
 
 namespace dds { namespace sub { namespace detail {
 class DRHolderBase {
@@ -53,7 +52,7 @@ public:
     }
 
     virtual void qos(const dds::sub::qos::DataReaderQos& the_qos) {
-        return DR_.qos(the_qos);
+    	DR_.qos(the_qos);
     }
 
     virtual const std::string topic_name() const {
@@ -65,7 +64,7 @@ public:
     }
 
     virtual ::dds::sub::Subscriber parent() const {
-        return parent(DR_);
+        return parent();
     }
 
     virtual void close() {

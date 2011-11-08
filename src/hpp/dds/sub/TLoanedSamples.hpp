@@ -1,16 +1,15 @@
-#ifndef OMG_DDS_SUB_LOANED_SAMPLES_HPP_
-#define OMG_DDS_SUB_LOANED_SAMPLES_HPP_
+#ifndef OMG_DDS_SUB_TLOANED_SAMPLES_HPP_
+#define OMG_DDS_SUB_TLOANED_SAMPLES_HPP_
 
-#include <dds/sub/detail/LoanedSamples.hpp>
 #include <dds/sub/Sample.hpp>
 
 namespace dds { namespace sub {
     template <typename T, 
-              template <typename Q> DELEGATE = detail::LoanedSamples>
+              template <typename Q> class DELEGATE>
     class LoanedSamples;
 } }
 
-template <typename T, template <typename Q> DELEGATE>
+template <typename T, template <typename Q> class DELEGATE>
 class dds::sub::LoanedSamples : public dds::core::Value< DELEGATE<T> >
 {
 public:
@@ -81,4 +80,4 @@ public:
     
 };
 
-#endif /* OMG_DDS_SUB_LOANED_SAMPLES_HPP_ */
+#endif /* OMG_DDS_SUB_TLOANED_SAMPLES_HPP_ */

@@ -29,6 +29,6 @@ public:
     inline int32_t sample() const {    
         return this->delegate()->sample();
     }
-}
+};
 
 #endif /* OMG_DDS_SUB_TRANK_HPP_ */

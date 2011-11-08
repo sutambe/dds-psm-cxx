@@ -20,10 +20,6 @@
  */
 
 #include <dds/core/InstanceHandle.hpp>
-#include <dds/sub/subfwd.hpp>
-#include <dds/sub/status/ReaderState.hpp>
-#include <dds/sub/cond/ReadCondition.hpp>
-
 
 namespace dds { namespace sub {
 
@@ -50,17 +46,18 @@ public:
     // --- Copy: --- //
 public:
     ReaderQuery(const ReaderQuery& src)
-    : instance_(src._instance),
+    : instance_(src.instance()),
       read_or_take_next_(src.read_or_take_next_),
       reader_state_(src.reader_state_),
       condition_(src.condition_)
     { }
 
     ReaderQuery& operator =(const ReaderQuery& src) {
-        instance_ = src._instance;
+        instance_ = src.instance();
         read_or_take_next_ = src.read_or_take_next_;
         reader_state_ = src.reader_state_;
         condition_ = src.condition_;
+        return *this;
     }
 
     // --- Conversion: --- //

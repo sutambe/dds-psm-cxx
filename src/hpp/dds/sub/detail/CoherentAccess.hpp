@@ -19,9 +19,11 @@
  * limitations under the License.
  */
 
-#include <dds/sub/detail/subfwd.hpp>
-#include <tdds/sub/CoherentAccess.hpp>
 #include <idds/sub/CoherentAccessImpl.hpp>
+#include <dds/sub/TCoherentAccess.hpp>
 
+namespace dds { namespace sub { namespace detail {
+	typedef ::dds::sub::TCoherentAccess<idds::sub::CoherentAccessImpl> CoherentAccess;
+} } }
 
 #endif /* OMG_DDS_SUB_DETAIL_COHERENT_ACCESS_HPP_ */

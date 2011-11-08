@@ -22,10 +22,6 @@
 #include <dds/core/TEntity.hpp>
 #include <dds/core/cond/StatusCondition.hpp>
 #include <dds/domain/DomainParticipant.hpp>
-#include <dds/sub/qos/SubscriberQos.hpp>
-#include <dds/sub/qos/DataReaderQos.hpp>
-
-
 
 namespace dds { namespace sub {
     template <typename DELEGATE>

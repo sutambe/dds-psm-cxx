@@ -19,11 +19,10 @@
  * limitations under the License.
  */
 
-#include <dds/core/corefwd.hpp>
-#include <dds/sub/subfwd.hpp>
-
 
 namespace dds { namespace sub {
+
+class AnyDataReader;
 
 class AnyDataReaderListener {
 public:

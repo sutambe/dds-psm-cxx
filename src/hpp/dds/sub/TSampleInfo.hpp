@@ -2,9 +2,7 @@
 #define OMG_DDS_SUB_TSAMPLE_INFO_HPP_
 
 #include <dds/core/Time.hpp>
-#include <dds/core/status/ReaderState.hpp>
-#include <dds/sub/GenerationCount.hpp>
-#include <dds/sub/Rank.hpp>
+#include <dds/core/Value.hpp>
 
 namespace dds { namespace sub {
 
@@ -15,8 +13,7 @@ namespace dds { namespace sub {
         TSampleInfo() { }
         
         template <typename ARG0>
-        TSampleInfo(const ARG0& src) 
-        : Value<DELEGATE>(src) { }
+        TSampleInfo(const ARG0& src) : dds::core::Value<DELEGATE>(src) { }
         
     public:
         const dds::core::Time timestamp() const {

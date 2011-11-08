@@ -33,5 +33,4 @@ public:
     }
 };
     
-
 #endif /* OMG_DDS_DOMAIN_T_DOMAIN_ID_HPP_ */

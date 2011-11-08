@@ -19,16 +19,19 @@
  * limitations under the License.
  */
 
-#include <iostream>
-
-#include <dds/core/cond/StatusCondition.hpp>
-#include <dds/sub/Sample.hpp>
-
 
 namespace dds { namespace sub { namespace detail {
 
 template <typename T>
 class DataReader {
+public:
+	DataReader(const dds::sub::Subscriber& pub,
+		           const ::dds::topic::Topic<T>& topic) { }
+	DataReader(const dds::sub::Subscriber& pub,
+	           const ::dds::topic::Topic<T>& topic,
+	           const dds::sub::qos::DataReaderQos& qos,
+	           dds::sub::DataReaderListener<T>* listener,
+               const dds::core::status::StatusMask& mask) { }
 public:
     /**
      * Returns a <code>StatusCondition</code> instance associated with

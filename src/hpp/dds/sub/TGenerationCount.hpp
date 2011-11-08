@@ -11,10 +11,10 @@ namespace dds { namespace sub {
 template <typename DELEGATE>
 class dds::sub::TGenerationCount : public dds::core::Value<DELEGATE> {
 public:
-    GenerationCount() { }
+    TGenerationCount() { }
     
     template <typename ARG0>
-    GenerationCount(const ARG0& arg)
+    TGenerationCount(const ARG0& arg)
     : dds::core::Value<DELEGATE>(arg) { }
     
 public:

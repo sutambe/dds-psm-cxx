@@ -1,3 +1,4 @@
+#include <iostream>
 #include <dds/pub/test/testPub.hpp>
 #include <dds/pub/DataWriter.hpp>
 #include <dds/pub/DataWriterListener.hpp>

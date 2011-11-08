@@ -19,7 +19,6 @@
  * limitations under the License.
  */
 
-#include <dds/sub/detail/subfwd.hpp>
 #include <dds/sub/cond/detail/ReadCondition.hpp>
 
 

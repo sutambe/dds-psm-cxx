@@ -41,9 +41,6 @@ private:
     SampleInfo info_;
 };
 
-
-template <typename T>
-class LoanedSamples { };
 } } }
 
 

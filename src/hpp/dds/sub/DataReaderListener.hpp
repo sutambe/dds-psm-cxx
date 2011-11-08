@@ -19,14 +19,18 @@
  * limitations under the License.
  */
 
-#include <dds/core/corefwd.hpp>
-#include <dds/sub/subfwd.hpp>
-
+#include <dds/core/status/Status.hpp>
 
 namespace dds { namespace sub {
+	template <typename T>
+	class DataReaderListener;
+
+	template <typename T>
+	class NoOpDataReaderListener;
+} }
 
 template <typename T>
-class DataReaderListener {
+class dds::sub::DataReaderListener {
 public:
     virtual ~DataReaderListener() { }
 
@@ -60,7 +64,7 @@ public:
 
 
 template <typename T>
-class NoOpDataReaderListener : public virtual DataReaderListener<T> {
+class dds::sub::NoOpDataReaderListener : public virtual DataReaderListener<T> {
 public:
     virtual ~NoOpDataReaderListener() { }
 
@@ -92,6 +96,4 @@ public:
             const dds::core::status::SampleLostStatus& status) { }
 };
     
-} }
-
 #endif /* OMG_DDS_SUB_DATA_READER_LISTENER_HPP_ */

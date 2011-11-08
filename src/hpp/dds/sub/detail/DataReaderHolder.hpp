@@ -19,7 +19,6 @@
  * limitations under the License.
  */
 
-#include <dds/sub/subfwd.hpp>
 #include <dds/sub/DataReader.hpp>
 
 
